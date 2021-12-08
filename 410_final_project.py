@@ -24,26 +24,32 @@ def scrape_lecture_video(url,driver):
 	links = []
 	#execute js on webpage to load listings on webpage and get ready to parse the loaded HTML 
 	soup = get_js_soup(url, driver)
-	for link_holder in soup.find_all("span", class_="cds-143 css-v4ktz5 cds-145"): #get list of all <div> of class 'name'
-		print(link_holder)
+	#for link_holder in soup.find_all("span", class_="cds-143 css-v4ktz5 cds-145"): # for coursera
+	for link_holder in soup.find_all("p"):
+		#print(link_holder)
 		extracted_text = link_holder.string #get text
-		print(extracted_text)
-		links.append(extracted_text)
+		if extracted_text:
+			links.append(extracted_text)
 	return links
 
-# extract coursera text
-url = 'https://www.coursera.org/learn/cs-410/lecture/PyTkW/lesson-5-2-feedback-in-vector-space-model-rocchio' 
-#url of Coursera page to scrape
+# process TF-IDF
+def tfidf(dataset):
+	tfIdfVectorizer=TfidfVectorizer(stop_words='english')
+	tfIdf = tfIdfVectorizer.fit_transform(dataset)
+	df = pd.DataFrame(tfIdf[0].T.todense(), index=tfIdfVectorizer.get_feature_names(), columns=["TF-IDF"])
+	df = df[df['TF-IDF'] > .05] # filter noise 
+	df = df.sort_values('TF-IDF', ascending=False)
+	return df
+
+# Extract text
+url = "https://en.wikipedia.org/wiki/Go_strategy_and_tactics"
 dataset = scrape_lecture_video(url,driver)
 driver.close()
 
-# process TF-IDF
-tfIdfVectorizer=TfidfVectorizer(stop_words='english')
-tfIdf = tfIdfVectorizer.fit_transform(dataset)
-df = pd.DataFrame(tfIdf[0].T.todense(), index=tfIdfVectorizer.get_feature_names(), columns=["TF-IDF"])
-df = df[df['TF-IDF'] > .05] # filter noise 
-df = df.sort_values('TF-IDF', ascending=False)
-print (df.head(25))
+# Get Keywords via TF-IDF
+keywords = tfidf(dataset)
+print(keywords)
 
-# pretty output
-# persist on page/hover
+# Write to File
+keywords.to_csv('scraped_website.csv',index=True,header=False)
+# Load to HTML
