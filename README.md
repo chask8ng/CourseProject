@@ -15,7 +15,7 @@ This comes in handy when needing to find more information on topics amongst mult
 Ideally wanted to do this directly against the Coursera videos, but required more permission set up. 
 Example code here is to use Wikipedia instead.
 The same idea, is to find keywords for lengthy articles, and make them noticeable to readers.
-Then spin them up in a separate HTML page, since we can't edit public pages directly (generate_html file).
+Then spin up keywords in a separate HTML page, since we can't edit public pages directly (generate_webpage.html file).
 
 ## 2. Implementation
 Used chromedriver to extract text from websites.
