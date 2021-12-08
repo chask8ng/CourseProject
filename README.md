@@ -9,7 +9,13 @@ Function tfidf:
 Produces top keywords from lecture video used, based on TF-IDF.
 Allows for use of top keywords to produce on Frontend.
 
-With these functions, you can parse any body of text to quickly identify keywords. This comes in handy when needing to find more information on topics amongst multiple documents.
+With these functions, you can parse any body of text to quickly identify keywords. 
+This comes in handy when needing to find more information on topics amongst multiple documents.
+
+Ideally wanted to do this directly against the Coursera videos, but required more permission set up. 
+Example code here is to use Wikipedia instead.
+The same idea, is to find keywords for lengthy articles, and make them noticeable to readers.
+Then spin them up in a separate HTML page, since we can't edit public pages directly.
 
 ## 2. Implementation
 Used chromedriver to extract text from websites.
