@@ -27,3 +27,6 @@ After that, see this helpful guide to make sure it's connected: https://www.kens
 
 ## 4. Contribution
 Single person team, so I did it all :)
+
+## 5. VIDEO EXPLANATION DEMO
+Shared walkthrough of project here: https://drive.google.com/file/d/1Z_5aZqoJtUrOL7yy6AtaaTpPqtWW4ppK/view?usp=sharing
